@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>manipulation de nombres</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .container {
+            margin-bottom: 20px;
+        }
+        input, button {
+            padding: 8px;
+            margin: 5px 0;
+        }
+        p {
+            padding: 10px;
+            background-color: #f0f0f0;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Opérations sur les nombres</h1>
+    
+    <div class="container">
+        <h2>Calcul de la racine carrée</h2>
+        <label for="nombre">Entrez un nombre :</label>
+        <input type="number" id="nombre" step="any">
+        <button onclick="calculerRacineCarree()">Calculer la racine carrée</button>
+        <p id="resultatRacine">La racine carrée apparaîtra ici</p>
+    </div>
+    
+    <div class="container">
+        <h2>Arrondi du nombre</h2>
+        <button onclick="arrondirNombre()">Arrondir le nombre</button>
+        <p id="resultatArrondi">Le nombre arrondi apparaîtra ici</p>
+    </div>
+    
+    <div class="container">
+        <h2>Nombre aléatoire</h2>
+        <button onclick="genererAleatoire()">Générer un nombre entre 1 et 100</button>
+        <p id="resultatAleatoire">Le nombre aléatoire apparaîtra ici</p>
+    </div>
+    
+    <div class="container">
+        <h2>Nombre aléatoire entre min et max</h2>
+        <label for="min">Minimum :</label>
+        <input type="number" id="min" value="1">
+        <label for="max">Maximum :</label>
+        <input type="number" id="max" value="100">
+        <button onclick="genererAleatoire2()">Générer un nombre</button>
+        <p id="resultatAleatoire2">Le nombre aléatoire apparaîtra ici</p>
+    </div>
+
+    <script>
+        // Fonction pour calculer la racine carrée
+        function calculerRacineCarree() {
+            const nombre = parseFloat(document.getElementById('nombre').value);
+            if (isNaN(nombre)) {
+                document.getElementById('resultatRacine').textContent = 'Veuillez entrer un nombre valide';
+            } else if (nombre < 0) {
+                document.getElementById('resultatRacine').textContent = 'Un nombre négatif n\'a pas de racine carrée réelle';
+            } else {
+                const racine = Math.sqrt(nombre);
+                document.getElementById('resultatRacine').textContent = `La racine carrée de ${nombre} est ${racine}`;
+            }
+        }
+        
+        // Fonction pour arrondir le nombre
+        function arrondirNombre() {
+            const nombre = parseFloat(document.getElementById('nombre').value);
+            if (isNaN(nombre)) {
+                document.getElementById('resultatArrondi').textContent = 'Veuillez entrer un nombre valide';
+            } else {
+                const arrondi = Math.round(nombre);
+                document.getElementById('resultatArrondi').textContent = `${nombre} arrondi est ${arrondi}`;
+            }
+        }
+        
+        // Fonction pour générer un nombre aléatoire entre 1 et 100
+        function Aleatoire() {
+            return Math.floor(Math.random() * 100) + 1;
+        }
+        
+        function genererAleatoire() {
+            const nombre = Aleatoire();
+            document.getElementById('resultatAleatoire').textContent = `Nombre aléatoire : ${nombre}`;
+        }
+        
+        // Fonction améliorée pour générer un nombre entre min et max
+        function Aleatoire2(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+        
+        function genererAleatoire2() {
+            const min = parseInt(document.getElementById('min').value);
+            const max = parseInt(document.getElementById('max').value);
+            
+            if (isNaN(min) || isNaN(max)) {
+                document.getElementById('resultatAleatoire2').textContent = 'Veuillez entrer des valeurs valides';
+                return;
+            }
+            
+            if (min >= max) {
+                document.getElementById('resultatAleatoire2').textContent = 'Le minimum doit être inférieur au maximum';
+                return;
+            }
+            
+            const nombre = Aleatoire2(min, max);
+            document.getElementById('resultatAleatoire2').textContent = `Nombre aléatoire entre ${min} et ${max} : ${nombre}`;
+        }
+    </script>
+</body>
+</html>
